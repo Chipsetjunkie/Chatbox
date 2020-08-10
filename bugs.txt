@@ -1,0 +1,2 @@
+Fix empty channel posts count
+
