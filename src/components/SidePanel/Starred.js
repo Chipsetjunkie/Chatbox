@@ -49,13 +49,10 @@ class Starred extends React.Component{
     .child(user.uid)
     .child('starred')
     .on('child_removed',snap=>{
-      console.log("removal")
       const channelToRemove = {id:snap.key, ...snap.val()}
-      console.log(channelToRemove)
       const filteredChannels = this.state.starredChannels.filter(channel =>{
         return channel.id !== channelToRemove.id;
       })
-      console.log(filteredChannels)
       this.setState({starredChannels:filteredChannels})
     })
   }
@@ -77,7 +74,6 @@ class Starred extends React.Component{
 
   render(){
     const {starredChannels} = this.state
-    console.log("channels",starredChannels)
     return(
       <Menu.Menu className="menu" >
       <Menu.Item style={{color:'white'}}>

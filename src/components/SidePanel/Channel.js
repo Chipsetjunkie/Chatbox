@@ -55,7 +55,6 @@ class Channels extends React.Component{
 
     handleNotifications = (channelId,currentChannelId,notifications,snap) =>{
       let lastTotal = 0;
-      console.log(notifications)
       let index =  notifications.findIndex(notification =>notification.id === channelId);
 
       if(index !== -1){

@@ -75,7 +75,6 @@ class Messages extends React.Component{
         .once('value')
         .then(data =>{
           if(data.val() !==null){
-            console.log("object keys", Object.keys(data.val()))
             const channelIds = Object.keys(data.val())
             const prevStarred = channelIds.includes(channelId)
             this.setState({isChannelStarred:prevStarred})

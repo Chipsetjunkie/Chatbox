@@ -17,7 +17,8 @@ class Userpanel extends React.Component{
     uploadedCroppedImage:'',
     metadata:{
       contentType:'image/jpeg'
-    }
+    },
+    defaultdp:''
   }
 
   handleChange = event =>{
@@ -98,6 +99,19 @@ class Userpanel extends React.Component{
       })
     };
 
+    setDefaultDp=()=>{
+      firebase.storage().ref().child('avatar/public/batman.png')
+      .getDownloadURL()
+      .then(url =>{
+        this.setState({
+          defaultdp:url
+        })
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    }
+
 
     openModal = () => this.setState({modal:true})
 
@@ -122,8 +136,8 @@ class Userpanel extends React.Component{
 
     render(){
 
-      const {modal,user, previewImage, croppedImage} = this.state;
-      console.log(user)
+      const {modal,user, previewImage, croppedImage, defaultdp} = this.state;
+      this.setDefaultDp()
       return(
         <>
         <Grid style={{background:this.props.primaryColor}}>
@@ -134,7 +148,7 @@ class Userpanel extends React.Component{
                         <Header.Content>DevChat</Header.Content>
                     </Header>
               <Header style={{padding:'0.25em'}} as="h4" inverted>
-                  <Image src={user.photoURL} avatar/>
+                  {user.photoURL ? <Image src={user.photoURL} avatar/> : <Image src={defaultdp} avatar size='tiny'/>}
                   &nbsp;
                   <Dropdown trigger={<span>{user.displayName}</span>} options={this.dropdownOptions}/>
               </Header>
